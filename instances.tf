@@ -49,7 +49,7 @@ resource "aws_instance" "nginx2" {
         sudo usermod -a -G docker ec2-user
         sudo docker pull sandeep1607/poos
         sudo docker run -p 8081:8081 --name terra -d sandeep1607/poos
-   
+   EOF
 #! /bin/bash
 sudo amazon-linux-extras install -y nginx1
 sudo service nginx start
