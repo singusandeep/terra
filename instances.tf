@@ -1,14 +1,11 @@
-##################################################################################
 # DATA
-##################################################################################
 
 data "aws_ssm_parameter" "ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
-##################################################################################
 # RESOURCES
-##################################################################################
+
 
 # INSTANCES #
 resource "aws_instance" "nginx1" {
@@ -19,7 +16,15 @@ resource "aws_instance" "nginx1" {
   key_name = "san"
 
   user_data = <<EOF
-#! /bin/bash
+        #! /bin/bash
+        sudo yum update -y
+        sudo yum install -y docker
+        sudo service docker start
+        sudo usermod -a -G docker ec2-user
+        sudo docker pull  sandeep1607/poos
+        sudo docker run -p 8081:8081 --name terra -d sandeep1607/poos
+    EOF
+  
 sudo amazon-linux-extras install -y nginx1
 sudo service nginx start
 sudo rm /usr/share/nginx/html/index.html
@@ -37,6 +42,14 @@ resource "aws_instance" "nginx2" {
   vpc_security_group_ids = [aws_security_group.nginx-sg.id]
   key_name = "san"
   user_data = <<EOF
+        #! /bin/bash
+        sudo yum update -y
+        sudo yum install -y docker
+        sudo service docker start
+        sudo usermod -a -G docker ec2-user
+        sudo docker pull sandeep1607/poos
+        sudo docker run -p 8081:8081 --name terra -d sandeep1607/poos
+   
 #! /bin/bash
 sudo amazon-linux-extras install -y nginx1
 sudo service nginx start
