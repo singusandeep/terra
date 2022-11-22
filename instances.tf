@@ -23,13 +23,12 @@ resource "aws_instance" "nginx1" {
         sudo usermod -a -G docker ec2-user
         sudo docker pull  sandeep1607/poos
         sudo docker run -p 8081:8081 --name terra -d sandeep1607/poos
-    EOF
   
 sudo amazon-linux-extras install -y nginx1
 sudo service nginx start
 sudo rm /usr/share/nginx/html/index.html
 echo '<html><head><title>Taco Team Server 1</title></head><body style=\"background-color:#1F778D\"><p style=\"text-align: center;\"><span style=\"color:#FFFFFF;\"><span style=\"font-size:28px;\">You did it! Have a &#127790;</span></span></p></body></html>' | sudo tee /usr/share/nginx/html/index.html
-
+EOF
 
   tags = local.common_tags
 
@@ -49,13 +48,13 @@ resource "aws_instance" "nginx2" {
         sudo usermod -a -G docker ec2-user
         sudo docker pull sandeep1607/poos
         sudo docker run -p 8081:8081 --name terra -d sandeep1607/poos
-   EOF
+  
 #! /bin/bash
 sudo amazon-linux-extras install -y nginx1
 sudo service nginx start
 sudo rm /usr/share/nginx/html/index.html
 echo '<html><head><title>Taco Team Server 2</title></head><body style=\"background-color:#1F778D\"><p style=\"text-align: center;\"><span style=\"color:#FFFFFF;\"><span style=\"font-size:28px;\">You did it! Have a &#127790;</span></span></p></body></html>' | sudo tee /usr/share/nginx/html/index.html
-
+EOF
 
   tags = local.common_tags
 
